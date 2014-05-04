@@ -1,0 +1,15 @@
+todo
+
+1. Create Hero Thumb
+	- Give Movement
+	- Allow for projectiles
+
+2. Create Enemy Thumbs
+	- Give random movements to enemy thumbs
+
+3. Create Blockers
+	- Give Movement to blockers
+
+
+Gameplay:
+
