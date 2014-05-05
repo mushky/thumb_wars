@@ -1,5 +1,3 @@
-require "menu"
-
 function love.load()
 	love.window.setTitle("Thumb Wars")
 
@@ -19,9 +17,6 @@ function love.load()
 
   -- setup the bullets
   bullets = {}
-  bullets.x = heroThumb.x
-  bullets.y = heroThumb.y
-  bullets.speed = 200
 
   -- enemyOne
 	enemyOne = {}
@@ -35,11 +30,8 @@ function love.load()
 	enemyTwo.x = 5
 	enemyTwo.y = 300
 	enemyTwo.speed = 150
-
-	-- Menu Buttons
-	button_spawn(5, 200, "Start")
-	button_spawn(20, 200, "Quit")
 end
+
 
 function love.update(dt)
 	-- heroThumb Movement
@@ -54,17 +46,24 @@ function love.update(dt)
 	if heroThumb.x < 0 then
 		heroThumb.x = 0
 	end
-
 	if heroThumb.x > 790 then
 		heroThumb.x = 790
 	end
 
-	bullet.update
+	-- heroThumb Bullets
+	if love.keyboard.isDown("j") then
+		local bullet = {x = heroThumb.x, y = heroThumb.y}
+		table.insert(bullets, bullet)
+		for i, bullet in ipairs(bullets) do
+			bullet.y = bullet.y - dt*500
+		end
+	end
 
 	-- protectorOne Movement
 	if love.keyboard.isDown("w") then
 		protectorOne.y = protectorOne.y - protectorOne.speed*dt
-	elseif love.keyboard.isDown("s") then
+	end
+	if love.keyboard.isDown("s") then
 		protectorOne.y = protectorOne.y + protectorOne.speed*dt
 	end
 
@@ -102,6 +101,11 @@ function love.draw()
  love.graphics.setColor(255,255,0,255)
  love.graphics.rectangle("fill", 300, 585, 200,10)
 
+ -- heroThumb Bullet
+ for i,bullet in ipairs(bullets) do
+ 	love.graphics.setColor(255,255,0,255)
+ 	love.graphics.circle("fill", bullet.x, bullet.y, 10, 30)
+ end
  -- protectorOne
  love.graphics.setColor(255,255,0,255)
  love.graphics.rectangle("fill", protectorOne.x, protectorOne.y, 30, 10)

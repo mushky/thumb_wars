@@ -1,16 +1,23 @@
-bulletSpeed = 50
 bullet = {}
+bullet.width = 5
+bullet.height = 20
+bulletSpeed = 500
 
 function bullet.spawn(x, y, dir)
-	table.insert(bullet, {width = 10, height = 10, x = x, y = y, dir = dir})
+	table.insert(bullet, {x = x, y = y, dir = dir})
 end
 
 function bullet.draw()
 	for i, v in ipairs(bullet) do
-		love.graphics.setColor(0,0,0)
-		love.graphics.rectangle("fill", v.x, v.y, v.width, v.height)
+		love.graphics.setColor(0,0,255)
+		love.graphics.circle("fill", v.x, v.y, v.width, v.height)
 	end
 end
+
+function bullet.move(dt)
+	for i,v in ipairs(bullet) do
+		
+	end
 
 function bullet.update(dt)
 	if v.dir == "right" then
